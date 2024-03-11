@@ -5,14 +5,14 @@ import json
 import sys
 import os
 from jsonschema import validate
-from datetime import date
+from datetime import datetime
 
 new_schema = {
     "type": "object",
     "properties": {
         "name": {"type": "string"},
         "post": {"type": "string"},
-        "year": {"type": "number"}
+        "year": {"type": "string"}
     },
     "required": ["name", "post", "year"],
 }
@@ -25,8 +25,14 @@ def get_worker():
 
     name = input("Фамилия и инициалы? ")
     post = input("Должность? ")
-    year = int(input("Год поступления? "))
+    day, month, year = map(int, input("Дата поступления? ").split('.'))
 
+    try:
+        year = datetime(year, month, day).date().strftime('%d.%m.%Y')
+    except Exception as e:
+        print(e)
+        return None
+    
     worker_data = {'name': name, 'post': post, 'year': year}
 
     try:
@@ -82,11 +88,12 @@ def select_workers(staff, period):
     Выбрать работников с заданным стажем.
     """
 
-    today = date.today()
+    today = datetime.today()
 
     result = []
     for employee in staff:
-        if today.year - employee.get('year', today.year) >= period:
+        year = datetime.strptime(employee.get('year', ''), '%d.%m.%Y').year
+        if today.year - year >= period:
             result.append(employee)
 
     return result

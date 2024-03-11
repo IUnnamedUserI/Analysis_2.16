@@ -3,6 +3,7 @@
 
 import json
 import sys
+from datetime import datetime
 
 def print_help():
     """
@@ -23,7 +24,8 @@ def add():
     surname = input("Введите фамилию: ")
     name = input("Введите имя: ")
     phone = input("Введите номер телефона: ")
-    date = tuple(map(int, input("Введите дату рождения: ").split('.')))
+    day, month, year = map(int, input("Введите дату рождения: ").split('.'))
+    date = datetime(year, month, day).date().strftime('%d.%m.%Y')
     
     new_member = {'surname': surname,
                     'name': name,
