@@ -30,7 +30,7 @@ def display_workers(staff):
 
     # Проверить, что список работников не пуст.
     if staff:
-    # Заголовок таблицы.
+        # Заголовок таблицы.
         line = '+-{}-+-{}-+-{}-+-{}-+'.format(
             '-' * 4,
             '-' * 30,
@@ -174,6 +174,7 @@ def main():
 
         else:
             print(f"Неизвестная команда {command}", file=sys.stderr)
+
 
 if __name__ == '__main__':
     main()

@@ -32,17 +32,17 @@ def get_worker():
     except Exception as e:
         print(e)
         return None
-    
+
     worker_data = {'name': name, 'post': post, 'year': year}
 
     try:
         validate(instance=worker_data, schema=new_schema)
         return {
-        'name': name,
-        'post': post,
-        'year': year,
+            'name': name,
+            'post': post,
+            'year': year,
         }
-    except Exception as e:
+    except Exception:
         print("Ошибка данных")
 
 
@@ -83,6 +83,7 @@ def display_workers(staff):
     else:
         print("Список работников пуст.")
 
+
 def select_workers(staff, period):
     """
     Выбрать работников с заданным стажем.
@@ -120,7 +121,7 @@ def load_workers(file_name):
             for data in file_data:
                 validate(instance=data, schema=new_schema)
             return file_data
-        except Exception as e:
+        except Exception:
             print("Ошибка загрузки данных")
             return None
     else:
@@ -179,6 +180,7 @@ def main():
 
         else:
             print(f"Неизвестная команда {command}", file=sys.stderr)
+
 
 if __name__ == '__main__':
     main()

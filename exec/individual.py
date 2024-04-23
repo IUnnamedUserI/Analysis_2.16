@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import json
-import sys
 from datetime import datetime
+
 
 def print_help():
     """
     Функция вывода доступных пользователю команд
     """
-    
+
     print("list - вывод всех добавленных записей")
     print("add - добавление новых записей")
     print("find - найти запись по фамилии")
@@ -20,19 +20,18 @@ def add():
     """
     Функция добавления новой записи, возвращает запись
     """
-    
+
     surname = input("Введите фамилию: ")
     name = input("Введите имя: ")
     phone = input("Введите номер телефона: ")
     day, month, year = map(int, input("Введите дату рождения: ").split('.'))
     date = datetime(year, month, day).date().strftime('%d.%m.%Y')
-    
+
     new_member = {'surname': surname,
-                    'name': name,
-                    'phone': phone,
-                    'date': date
-                }
-    
+                  'name': name,
+                  'phone': phone,
+                  'date': date}
+
     return new_member
 
 
@@ -40,26 +39,26 @@ def print_list(list):
     """
     Функция выводит на экран список всех существующих записей
     """
-    
+
     for member in member_list:
         print(f"{member['surname']} {member['name']}, "
-                f"{member['phone']}, {member['date']}")
-        
+              f"{member['phone']}, {member['date']}")
+
 
 def find_member(surname):
     """
     Функция для вывода на экран всех записей, чьи фамилии совпадают
     с введённой (не возвращает никаких значений)
     """
-    
+
     count = 0
 
     for member in member_list:
         if member['surname'] == surname:
             print(f"{member['surname']} {member['name']}, "
-                f"{member['phone']}, {member['date']}")
+                  f"{member['phone']}, {member['date']}")
             count += 1
-        
+
         if count == 0:
             print("Записи не найдены")
 
@@ -86,7 +85,7 @@ if __name__ == "__main__":
     """
     Основная программа
     """
-    
+
     member_list = []
 
     while True:
@@ -101,7 +100,7 @@ if __name__ == "__main__":
 
         elif cmd == "list":
             print_list(member_list)
-                
+
         elif cmd == "find":
             find_member(input("Введите фамилию: "))
 
